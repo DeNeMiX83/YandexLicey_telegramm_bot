@@ -14,4 +14,4 @@ class Roles(SqlAlchemyBase):
     users = orm.relation('Users', back_populates='role')
 
     def __repr__(self):
-        return f'id: {self.id}, tag: {self.tag}, name: {self.name}'
+        return '{\n' + f'\tid: {self.id}, tag: {self.tag}' + '}'

@@ -13,9 +13,11 @@ class Users(SqlAlchemyBase):
     user_name = sqlalchemy.Column(sqlalchemy.String)
     name = sqlalchemy.Column(sqlalchemy.String)
     role_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('roles.id'))
+    chief_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.user_id'))
     modifited_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.now())
 
     role = orm.relation('Roles')
+    subordinates = orm.relation('Users', primaryjoin='Users.user_id==Users.chief_id')
 
     def __repr__(self):
-        return f'id: {self.user_id}, user_name: {self.user_name}, role: {self.role}'
+        return '{\n' + f'id: {self.user_id}, user_name: {self.user_name}, role: {self.role}' + '}'
