@@ -4,7 +4,7 @@ from aiogram.dispatcher.filters.builtin import CommandStart
 from db import session
 from db.data import Users
 from db.data.roles import Roles
-from .func.user import register_user, get_user_panel
+from .func.user import register_user, get_user_panel, show_panel
 from loader import dp
 
 
@@ -21,8 +21,6 @@ async def bot_start(msg: types.Message):
         else:
             register_user(user_id, user_name, name)
     user = session.query(Users).get(user_id)
-    panel = await get_user_panel(user_id)
-    await msg.answer(f'Привет, {name}'
-                     f'\nВаша роль: {user.role.name}',
-                     reply_markup=panel
-                     )
+    text = f'Привет, {name}' \
+           f'\nВаша роль: {user.role.name}'
+    await show_panel(user_id, text)
