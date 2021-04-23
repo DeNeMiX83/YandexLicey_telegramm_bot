@@ -16,7 +16,10 @@ def register_user(user_id, user_name, name):
 
 
 async def get_user_panel(user_id):
-    tag = session.query(Users).get(user_id).role.tag
+    user = session.query(Users).get(user_id)
+    if not user:
+        return
+    tag = user.role.tag
     panel = no_role
     await NoRoleState.Start.set()
     if tag == 'chief':
@@ -28,7 +31,7 @@ async def get_user_panel(user_id):
     return panel
 
 
-async def show_panel(user_id, text=''):
+async def show_panel_role(user_id, text=''):
     panel = await get_user_panel(user_id)
     await bot.send_message(chat_id=user_id,
                            text=text,
