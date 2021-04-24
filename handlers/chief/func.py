@@ -1,6 +1,4 @@
-from aiogram.types import Message
-from telebot.types import ReplyKeyboardRemove
-
+from aiogram.types import Message, ReplyKeyboardRemove
 from keyboards.default.chief import panel_subordinates_list
 from keyboards.inline.chief import inline_tools_show_subordinates
 from loader import bot

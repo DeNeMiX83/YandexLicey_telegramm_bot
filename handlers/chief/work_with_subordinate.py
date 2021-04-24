@@ -1,8 +1,10 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher.filters import Text
 
 from db import session
 from db.data import Users
+from handlers.chief.func import show_panel
 from keyboards.default.chief import panel_tools_with_subordinate
 from loader import dp
 from states.chief import ShowSubordinatesState
@@ -25,13 +27,15 @@ async def work_with_sub(msg: types.Message, state: FSMContext):
     await state.update_data(data)
 
 
-@dp.message_handler(Text(equals=['Удалить подчиненного']), state=ShowSubordinatesState.Start)
+@dp.message_handler(Text(equals=['Удалить подчиненного']), state=ShowSubordinatesState.Tools)
 async def delete_sub(msg: types.Message, state: FSMContext):
     data = await state.get_data()
     user_id = data['subordinate_id']
     user = session.query(Users).get(user_id)
-    session.delete(user)
+    user.chief_id = None
     session.commit()
+    await msg.answer(text='Подчиненный удален')
+    await show_panel(msg.from_user.id)
 
 
 
