@@ -1,1 +1,1 @@
-from .inline_tools_with_subordinates import inline_tools_with_subordinates
+from .inline_tools_show_subordinates import inline_tools_show_subordinates

@@ -2,7 +2,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from keyboards.inline.callback_data import exit_calldata, tools
 
-inline_tools_with_subordinates = InlineKeyboardMarkup(
+inline_tools_show_subordinates = InlineKeyboardMarkup(
     inline_keyboard=[
         [
             InlineKeyboardButton(text='Добавить подчиненного',
