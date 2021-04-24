@@ -14,7 +14,8 @@ inline_tools_show_subordinates = InlineKeyboardMarkup(
         [
             InlineKeyboardButton(text='Назад',
                                  callback_data=exit_calldata.new(
-                                    type='panel'
+                                     type='panel',
+                                     attribute='none'
                                  ))
         ]
     ]

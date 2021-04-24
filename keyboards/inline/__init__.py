@@ -1,1 +1,1 @@
-from .exit import inline_exit
+from .inline_exit import inline_exit

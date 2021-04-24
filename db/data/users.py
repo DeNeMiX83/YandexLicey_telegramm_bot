@@ -18,6 +18,7 @@ class Users(SqlAlchemyBase):
 
     role = orm.relation('Roles')
     subordinates = orm.relation('Users', primaryjoin='Users.user_id==Users.chief_id')
+    tasks = orm.relation('Tasks', primaryjoin='Tasks.user_id==Users.user_id')
 
     def __repr__(self):
         return '{\n' + f'id: {self.user_id}, user_name: {self.user_name}, role: {self.role}' + '}'
