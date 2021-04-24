@@ -1,6 +1,6 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 
-no_role = ReplyKeyboardMarkup(
+panel_no_role = ReplyKeyboardMarkup(
     keyboard=[
         [
             KeyboardButton(text='Выбрать роль'),

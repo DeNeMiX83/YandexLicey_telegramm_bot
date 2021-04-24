@@ -1,8 +1,10 @@
+from keyboards.default.chief import panel_chief
+from keyboards.default.subordinate import panel_subordinate
 from loader import bot
 
 from db import session
 from db.data import Users
-from keyboards.default import no_role, panel_chief, panel_subordinate
+from keyboards.default import panel_no_role
 from states import NoRoleState, ChiefRoleState, SubordinateRoleState
 
 
@@ -20,7 +22,7 @@ async def get_user_panel(user_id):
     if not user:
         return
     tag = user.role.tag
-    panel = no_role
+    panel = panel_no_role
     await NoRoleState.Start.set()
     if tag == 'chief':
         panel = panel_chief
