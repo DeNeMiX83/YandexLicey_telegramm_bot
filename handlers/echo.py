@@ -8,7 +8,7 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 
 
-@dp.message_handler(Text(equals=['Назад']), state='*')
+@dp.message_handler(Text(equals=['Назад', 'В главное меню']), state='*')
 async def back(msg: types.Message, state: FSMContext):
     await show_panel_role(msg.from_user.id, 'Возвращение')
 
@@ -16,9 +16,10 @@ async def back(msg: types.Message, state: FSMContext):
 @dp.message_handler(state='*')
 async def bot_echo(msg: types.Message, state: FSMContext):
     await show_panel_role(msg.from_user.id, 'Произошла ошибка')
+    await state.reset_data()
 
 
 @dp.callback_query_handler(state='*')
 async def exit_from_call(call: CallbackQuery, state: FSMContext):
     await call.message.delete()
-    await show_panel_role(call.from_user.id, 'Возвращение')
+    await show_panel_role(call.from_user.id, 'Произошла ошибка')

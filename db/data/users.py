@@ -17,7 +17,8 @@ class Users(SqlAlchemyBase):
     modifited_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.now())
 
     role = orm.relation('Roles')
-    subordinates = orm.relation('Users', primaryjoin='Users.user_id==Users.chief_id')
+    subordinates = orm.relation('Users', backref=orm.backref('chief', remote_side=[user_id]))
+    tasks = orm.relation('Tasks', primaryjoin='Tasks.user_id==Users.user_id')
 
     def __repr__(self):
         return '{\n' + f'id: {self.user_id}, user_name: {self.user_name}, role: {self.role}' + '}'

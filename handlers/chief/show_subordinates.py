@@ -4,7 +4,7 @@ from aiogram.types import CallbackQuery
 
 from db import session
 from db.data import Users
-from handlers.chief.func import show_panel
+from handlers.chief.func import show_chief_panel
 from keyboards.inline import inline_exit
 from keyboards.inline.callback_data import tools, exit_calldata
 from loader import dp
@@ -34,14 +34,14 @@ async def edit_subordinate_id(msg: types.Message, state: FSMContext):
     session.commit()
     await msg.answer(text='Подчиненный добавлен')
     await ShowSubordinatesState.Start.set()
-    await show_panel(msg.from_user.id)
+    await show_chief_panel(msg.from_user.id)
 
 
 @dp.callback_query_handler(exit_calldata.filter(type='add_subordinate'), state='*')
 async def exit_from_call(call: CallbackQuery, state: FSMContext):
     await call.message.delete()
     await ShowSubordinatesState.Start.set()
-    await show_panel(call.from_user.id)
+    await show_chief_panel(call.from_user.id)
 
 
 def incorrect_user_id(text):
