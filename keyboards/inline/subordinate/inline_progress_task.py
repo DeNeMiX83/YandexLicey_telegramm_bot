@@ -13,7 +13,7 @@ def create_panel(task_id):
                                                           attribute='add_file',
                                                           info=str(task_id))),
               )
-    panel.add(InlineKeyboardButton(text='Закончить',
+    panel.add(InlineKeyboardButton(text='Отправить',
                                    callback_data=task.new(type='done',
                                                           attribute='none',
                                                           info=str(task_id))))

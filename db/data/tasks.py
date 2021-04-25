@@ -16,4 +16,5 @@ class Tasks(SqlAlchemyBase):
     date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.now())
 
     user = orm.relation('Users')
-    voices = orm.relation('ChiefVoiceToTask', primaryjoin='Tasks.id==ChiefVoiceToTask.task_id')
+    chief_voices = orm.relation('ChiefVoiceToTask', primaryjoin='Tasks.id==ChiefVoiceToTask.task_id')
+    voices = orm.relation('VoiceToTask', primaryjoin='Tasks.id==VoiceToTask.task_id')

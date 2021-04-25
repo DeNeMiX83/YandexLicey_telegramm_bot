@@ -7,6 +7,7 @@ from db.data import Tasks
 from keyboards.default import panel_exit
 from keyboards.default.subordinate.func import show_tools_with_task
 from keyboards.inline.callback_data import task
+from keyboards.inline.chief import inline_show_file_to_task
 from keyboards.inline.subordinate import inline_new_task, inline_progress_task
 from loader import dp, bot
 from states.subordinate import SubordinateRoleState
@@ -69,6 +70,12 @@ async def done_task(call: CallbackQuery, callback_data: dict, state: FSMContext)
     task = session.query(Tasks).get(task_id)
     task.progress = 'done'
     session.commit()
+    user = task.user
+    chief_id = user.chief.user_id
+    await bot.send_message(chat_id=chief_id,
+                           text=f'Подчиненный: {user.name} выполниз задание\n'
+                                f'Название: {task.title}',
+                           reply_markup=inline_show_file_to_task(task_id))
 
 
 @dp.message_handler(Text(equals=['Назад']),
