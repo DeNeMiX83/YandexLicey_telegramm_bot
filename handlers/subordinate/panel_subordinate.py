@@ -2,6 +2,8 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 from aiogram.types import Message
 
+from db import session
+from db.data import Users
 from keyboards.default.subordinate import panel_tools_with_task
 from keyboards.default.subordinate.func import show_tools_with_task
 from loader import dp

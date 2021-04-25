@@ -6,3 +6,4 @@ class SubordinateRoleState(StatesGroup):
     TaskTools = State()
     NewTask = State()
     ProgressTask = State()
+    ChooseTypeAddFile = State()

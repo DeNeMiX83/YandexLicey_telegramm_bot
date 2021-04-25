@@ -6,12 +6,13 @@ from aiogram.types import Message, ReplyKeyboardRemove, CallbackQuery
 
 from data.constant import MONTH
 from db import session
-from db.data import Tasks, TaskToVoice
+from db.data import Tasks, ChiefVoiceToTask
 from handlers.chief.func import show_tools_with_subordinate, show_work_with_task_panel
 from keyboards.default.chief import panel_task
 from keyboards.inline import inline_exit
 from keyboards.inline.callback_data import task, exit_calldata
 from keyboards.inline.chief import inline_add_task
+from keyboards.inline.subordinate import inline_new_task
 from loader import dp, bot
 from states.chief import PanelTaskState, AddTaskState
 
@@ -68,10 +69,13 @@ async def notice_change_time(call: CallbackQuery, callback_data: dict, state: FS
     session.commit()
     task_id = new_task.id
     for id in voice_id:
-        task_to_voice = TaskToVoice(task_id=task_id,
-                                    voice_id=id)
+        task_to_voice = ChiefVoiceToTask(task_id=task_id,
+                                         voice_id=id)
         session.add(task_to_voice)
     session.commit()
+    panel = inline_new_task(task_id)
+    await bot.send_message(chat_id=subordinate_id, text=f'Содержание: {new_task.title}',
+                            reply_markup=panel)
     await state.reset_data()
     await call.message.delete()
     await call.message.answer(text='Задача сохранена')
