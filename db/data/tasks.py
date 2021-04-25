@@ -11,9 +11,9 @@ class Tasks(SqlAlchemyBase):
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     user_id = sqlalchemy.Column(sqlalchemy.ForeignKey('users.user_id'))
-    contant = sqlalchemy.Column(sqlalchemy.String)
-    voice_id = sqlalchemy.Column(sqlalchemy.String)
-    is_finished = sqlalchemy.Column(sqlalchemy.Boolean, default=False)
+    title = sqlalchemy.Column(sqlalchemy.String)
+    progress = sqlalchemy.Column(sqlalchemy.String, default='todo')
     date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.now())
 
     user = orm.relation('Users')
+    voices = orm.relation('TaskToVoice', primaryjoin='Tasks.id==TaskToVoice.task_id')

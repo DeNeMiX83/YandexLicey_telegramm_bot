@@ -10,9 +10,9 @@ inline_add_task = InlineKeyboardMarkup(
                 attribute='voice_message',
                 info='none'
             )),
-            InlineKeyboardButton(text='Содержание', callback_data=task.new(
+            InlineKeyboardButton(text='Название', callback_data=task.new(
                 type='edit',
-                attribute='contant',
+                attribute='title',
                 info='none'
             ))
         ],
