@@ -22,4 +22,4 @@ async def bot_echo(msg: types.Message, state: FSMContext):
 @dp.callback_query_handler(state='*')
 async def exit_from_call(call: CallbackQuery, state: FSMContext):
     await call.message.delete()
-    await show_panel_role(call.from_user.id, 'Возвращение')
+    await show_panel_role(call.from_user.id, 'Произошла ошибка')

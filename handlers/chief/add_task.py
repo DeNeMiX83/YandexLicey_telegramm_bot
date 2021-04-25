@@ -72,11 +72,11 @@ async def notice_change_time(call: CallbackQuery, callback_data: dict, state: FS
         task_to_voice = ChiefVoiceToTask(task_id=task_id,
                                          voice_id=id)
         session.add(task_to_voice)
-    session.commit()
     panel = inline_new_task(task_id)
     await bot.send_message(chat_id=subordinate_id, text=f'Содержание: {new_task.title}',
                             reply_markup=panel)
-    await state.reset_data()
+    session.commit()
+    await state.set_data({'subordinate_id': subordinate_id})
     await call.message.delete()
     await call.message.answer(text='Задача сохранена')
     await show_work_with_task_panel(call.from_user.id)

@@ -9,15 +9,13 @@ async def show_chief_panel(user_id):
     pass
 
 
-async def show_toola_for_add_file(user_id, state: FSMContext):
+async def show_tools_for_add_file(user_id, state: FSMContext):
     msg = await bot.send_message(chat_id=user_id,
                                  text='Инструменты',
                                  reply_markup=panel_tools_add_file)
     data = await state.get_data()
     msg_id = data.get('msg_id_tools_add_file')
-    print(data)
-    print(msg_id)
     if msg_id:
-        await bot.delete_message(chat_id=msg.from_user.id, message_id=msg_id)
+        await bot.delete_message(chat_id=user_id, message_id=msg_id)
     await state.set_data({'msg_id_tools_add_file': msg.message_id})
     await SubordinateRoleState.ChooseTypeAddFile.set()
