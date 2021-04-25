@@ -54,8 +54,7 @@ async def start_new_task(call: CallbackQuery, callback_data: dict, state: FSMCon
     task = session.query(Tasks).get(task_id)
     voices = task.voices
     for voice in voices:
-        print(voice.voice_id)
-        await call.message.answer_audio(audio=voice.voice_id)
+        await call.message.answer_voice(voice=voice.voice_id)
 
 
 @dp.message_handler(Text(equals=['Назад']), state=[SubordinateRoleState.NewTask, SubordinateRoleState.ProgressTask])
