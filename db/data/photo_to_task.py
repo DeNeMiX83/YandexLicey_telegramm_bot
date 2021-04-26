@@ -9,6 +9,6 @@ class PhotoToTask(SqlAlchemyBase):
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
     task_id = sqlalchemy.Column(sqlalchemy.ForeignKey('tasks.id'))
-    voice_id = sqlalchemy.Column(sqlalchemy.String)
+    photo_id = sqlalchemy.Column(sqlalchemy.String)
 
-    task = orm.relation('Tasks')
+    task = orm.relation('Tasks', back_populates='photos')

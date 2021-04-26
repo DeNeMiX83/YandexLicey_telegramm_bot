@@ -18,3 +18,4 @@ class Tasks(SqlAlchemyBase):
     user = orm.relation('Users', back_populates='tasks')
     chief_voices = orm.relation('ChiefVoiceToTask', primaryjoin='Tasks.id==ChiefVoiceToTask.task_id')
     voices = orm.relation('VoiceToTask', primaryjoin='Tasks.id==VoiceToTask.task_id')
+    photos = orm.relation('PhotoToTask', primaryjoin='Tasks.id==PhotoToTask.task_id')

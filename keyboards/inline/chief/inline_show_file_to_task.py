@@ -9,12 +9,19 @@ def create_panel(task_id):
     panel = InlineKeyboardMarkup()
     task_obj = session.query(Tasks).get(task_id)
     voices = task_obj.voices
-    print(voices)
+    photos = task_obj.photos
     if voices:
         panel.add(InlineKeyboardButton(text='Аудиосообщения',
                                        callback_data=task.new(
                                            type='task_file',
                                            attribute='voices',
+                                           info=str(task_id)
+                                       )))
+    if photos:
+        panel.add(InlineKeyboardButton(text='Фотографии',
+                                       callback_data=task.new(
+                                           type='task_file',
+                                           attribute='photos',
                                            info=str(task_id)
                                        )))
     return panel
