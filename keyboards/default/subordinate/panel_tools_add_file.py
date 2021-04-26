@@ -7,6 +7,9 @@ panel_tools_add_file = ReplyKeyboardMarkup(
             KeyboardButton(text='Фотографии'),
         ],
         [
+            KeyboardButton(text='Документы'),
+        ],
+        [
             KeyboardButton(text='Назад'),
         ],
     ],

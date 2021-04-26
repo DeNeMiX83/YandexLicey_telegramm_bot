@@ -4,7 +4,7 @@ from aiogram.types import CallbackQuery, Message
 
 from handlers.subordinate.func import show_tools_for_add_file
 from keyboards.default import panel_exit
-from keyboards.default.chief import panel_save_add_file
+from keyboards.default.subordinate import panel_save_add_file
 from keyboards.inline.callback_data import task
 from loader import dp, bot
 from states.subordinate import SubordinateRoleState, AddFileToTaskState
@@ -22,6 +22,20 @@ async def button_add_voice(msg: Message):
     await msg.answer(text='Начинайте присылать сообщения',
                      reply_markup=panel_save_add_file)
     await AddFileToTaskState.AddVoice.set()
+
+
+@dp.message_handler(Text(equals=['Фотографии']), state=SubordinateRoleState.ChooseTypeAddFile)
+async def button_add_photo(msg: Message):
+    await msg.answer(text='Начинайте присылать фотографии',
+                     reply_markup=panel_save_add_file)
+    await AddFileToTaskState.AddPhoto.set()
+
+
+@dp.message_handler(Text(equals=['Документы']), state=SubordinateRoleState.ChooseTypeAddFile)
+async def button_add_document(msg: Message):
+    await msg.answer(text='Начинайте присылать файлы',
+                     reply_markup=panel_save_add_file)
+    await AddFileToTaskState.AddDocument.set()
 
 
 @dp.message_handler(Text(equals=['Назад']), state=SubordinateRoleState.ChooseTypeAddFile)

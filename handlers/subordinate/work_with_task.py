@@ -58,7 +58,7 @@ async def show_progress_task(msg: Message, state: FSMContext):
 async def send_voice(call: CallbackQuery, callback_data: dict, state: FSMContext):
     task_id = callback_data['info']
     task = session.query(Tasks).get(task_id)
-    voices = task.voices
+    voices = task.chief_voices
     for voice in voices:
         await call.message.answer_voice(voice=voice.voice_id)
 

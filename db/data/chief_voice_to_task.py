@@ -11,4 +11,4 @@ class ChiefVoiceToTask(SqlAlchemyBase):
     task_id = sqlalchemy.Column(sqlalchemy.ForeignKey('tasks.id'))
     voice_id = sqlalchemy.Column(sqlalchemy.String)
 
-    task = orm.relation('Tasks')
+    task = orm.relation('Tasks', back_populates='chief_voices')
