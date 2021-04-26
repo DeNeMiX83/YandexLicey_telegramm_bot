@@ -15,6 +15,6 @@ class Tasks(SqlAlchemyBase):
     progress = sqlalchemy.Column(sqlalchemy.String, default='todo')
     date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.now())
 
-    user = orm.relation('Users')
+    user = orm.relation('Users', back_populates='tasks')
     chief_voices = orm.relation('ChiefVoiceToTask', primaryjoin='Tasks.id==ChiefVoiceToTask.task_id')
     voices = orm.relation('VoiceToTask', primaryjoin='Tasks.id==VoiceToTask.task_id')
