@@ -31,6 +31,13 @@ async def button_add_photo(msg: Message):
     await AddFileToTaskState.AddPhoto.set()
 
 
+@dp.message_handler(Text(equals=['Документы']), state=SubordinateRoleState.ChooseTypeAddFile)
+async def button_add_document(msg: Message):
+    await msg.answer(text='Начинайте присылать файлы',
+                     reply_markup=panel_save_add_file)
+    await AddFileToTaskState.AddDocument.set()
+
+
 @dp.message_handler(Text(equals=['Назад']), state=SubordinateRoleState.ChooseTypeAddFile)
 async def back_add_file(msg: Message, state: FSMContext):
     data = await state.get_data()

@@ -17,5 +17,5 @@ async def show_tools_for_add_file(user_id, state: FSMContext):
     msg_id = data.get('msg_id_tools_add_file')
     if msg_id:
         await bot.delete_message(chat_id=user_id, message_id=msg_id)
-    await state.set_data({'msg_id_tools_add_file': msg.message_id})
+    await state.update_data({'msg_id_tools_add_file': msg.message_id})
     await SubordinateRoleState.ChooseTypeAddFile.set()

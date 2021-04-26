@@ -13,13 +13,4 @@ async def show_photo(call: CallbackQuery, callback_data: dict, state: FSMContext
     task = session.query(Tasks).get(task_id)
     photos = task.photos
     for photo in photos:
-        await call.message.answer_voice(voice=photo.photo_id)
-
-
-@dp.callback_query_handler(task.filter(type='task_file', attribute='photos'), state='*')
-async def show_photo(call: CallbackQuery, callback_data: dict, state: FSMContext):
-    task_id = callback_data['info']
-    task = session.query(Tasks).get(task_id)
-    photos = task.photos
-    for photo in photos:
-        await call.message.answer_voice(voice=photo.photo_id)
+        await call.message.answer_photo(photo=photo.photo_id)

@@ -12,7 +12,6 @@ from states.subordinate import AddFileToTaskState
 @dp.message_handler(content_types=['photo'], state=AddFileToTaskState.AddPhoto)
 async def add_photo(msg: Message, state: FSMContext):
     data = await state.get_data()
-    print(msg.photo[-1])
     data['photo_id'] = data.get('photo_id', []) + [msg.photo[-1].file_id]
     await state.set_data(data)
 
