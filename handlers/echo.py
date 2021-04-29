@@ -19,6 +19,12 @@ async def bot_echo(msg: types.Message, state: FSMContext):
     await state.reset_data()
 
 
+@dp.callback_query_handler(exit_calldata.filter(type='panel'), state='*')
+async def exit_from_call_panel(call: CallbackQuery, state: FSMContext):
+    await call.message.delete()
+    await show_panel_role(call.from_user.id, 'Возвращение')
+
+
 @dp.callback_query_handler(state='*')
 async def exit_from_call(call: CallbackQuery, state: FSMContext):
     await call.message.delete()

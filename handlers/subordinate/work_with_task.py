@@ -63,7 +63,7 @@ async def send_voice(call: CallbackQuery, callback_data: dict, state: FSMContext
         await call.message.answer_voice(voice=voice.voice_id)
 
 
-@dp.callback_query_handler(task.filter(type='done'), state=SubordinateRoleState.ProgressTask)
+@dp.callback_query_handler(task.filter(type='done'), state='*')
 async def done_task(call: CallbackQuery, callback_data: dict, state: FSMContext):
     await call.message.delete()
     task_id = callback_data['info']
