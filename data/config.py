@@ -1,6 +1,10 @@
-from environs import Env
+from environs import Env, EnvValidationError
+import os
 
 env = Env()
 env.read_env()
 
-BOT_TOKEN = env.str("BOT_TOKEN")
+try:
+    BOT_TOKEN = env.str("BOT_TOKEN")
+except EnvValidationError:
+    BOT_TOKEN = os.environ['BOT_TOKEN']
