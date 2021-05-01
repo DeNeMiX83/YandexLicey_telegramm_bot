@@ -7,7 +7,7 @@ from db.data import Users
 from handlers.chief.func import show_chief_panel
 from keyboards.inline import inline_exit
 from keyboards.inline.callback_data import tools, exit_calldata
-from loader import dp
+from loader import dp, bot
 from states.chief import ShowSubordinatesState
 
 
@@ -33,6 +33,7 @@ async def edit_subordinate_id(msg: types.Message, state: FSMContext):
     user.chief_id = msg.from_user.id
     session.commit()
     await msg.answer(text='Подчиненный добавлен')
+    await bot.send_message(chat_id=user_id, text=f'У вас новый начальник: {msg.from_user.full_name}')
     await ShowSubordinatesState.Start.set()
     await show_chief_panel(msg.from_user.id)
 

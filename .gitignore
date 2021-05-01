@@ -138,3 +138,9 @@ dmypy.json
 cython_debug/
 /proba.py
 /db/notice.db
+/.idea/vcs.xml
+/.idea/YandexLicey_telegramm_bot.iml
+/.idea/inspectionProfiles/
+/.idea/dataSources.xml
+/.idea/misc.xml
+/.idea/modules.xml
