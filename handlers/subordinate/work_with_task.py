@@ -73,7 +73,7 @@ async def done_task(call: CallbackQuery, callback_data: dict, state: FSMContext)
     user = task.user
     chief_id = user.chief.user_id
     await bot.send_message(chat_id=chief_id,
-                           text=f'Подчиненный: {user.name} выполниз задание\n'
+                           text=f'Подчиненный: {user.name} выполнил задание\n'
                                 f'Название: {task.title}',
                            reply_markup=inline_show_file_to_task(task_id))
 

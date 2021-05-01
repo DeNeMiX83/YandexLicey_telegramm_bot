@@ -5,7 +5,6 @@ import sqlalchemy
 from .db_session import SqlAlchemyBase
 from sqlalchemy import orm
 
-
 class Users(SqlAlchemyBase):
     __tablename__ = 'users'
 
